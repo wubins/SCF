@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"  xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+     	http://www.springframework.org/schema/cache/spring-cache.xsd">
+     	
+   <!-- memcached 缓存配置  begin-->
+	<bean id="scf:memcachedClientBuilder" class="com.scf.core.context.spring.memcache.MemcacheWrapper">
+		<property name="connectionPoolSize" value="${memcached.connection.pool.size}" />
+		<property name="enable" value="${memcached.server.enable}" />
+		<property name="failureMode" value="true" />
+		<constructor-arg>
+			<value>${memcached.server.url}</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>${memcached.server.user}</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>${memcached.server.password}</value>
+		</constructor-arg>
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+		</property>
+		<property name="transcoder">
+			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+		</property>
+	</bean>
+
+	<!-- Use factory bean to build memcached client -->
+ 	<bean id="scf:memcachedClient" factory-bean="scf:memcachedClientBuilder"
+		factory-method="build" destroy-method="shutdown" />
+	
+	<!-- <cache:annotation-driven  cache-manager="cacheManager"  mode="proxy"  proxy-target-class="true" /> -->
+	
+	<!-- memCachedOperation缓存操作类。注意：可以直接使用，但是不支持事务特性 -->
+	 <bean id="scf:memCachedOperation" class="com.scf.core.context.spring.memcache.cleint.MemCachedOperation"> 
+	 	<property name="mcc" ref="scf:memcachedClient"></property>
+	 	<property name="enable" value="${memcached.server.enable}" />
+	 </bean>
+	 
+	<!-- memcached 缓存配置  end-->
+	
+	
+	
+	
+</beans>

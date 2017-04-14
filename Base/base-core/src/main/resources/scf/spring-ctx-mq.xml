@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="scf:mqConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="${mq.jms.brokerURL}" />
+				<property name="closeTimeout" value="${mq.jms.closeTimeout}" />
+				<property name="userName" value="${mq.jms.userName}" />
+				<property name="password" value="${mq.jms.password}" />
+				<property name="optimizedAckScheduledAckInterval" value="${mq.jms.optimizedAckScheduledAckInterval}" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Spring JMS Template -->
+	<bean id="scf:jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="scf:mqConnectionFactory" />
+        <property name="sessionTransacted" value="${mq.jms.sessionTransacted}"/>
+	</bean>
+	
+	<!--消息发送 -->
+	<bean id="scf:textMessageSender" class="com.scf.core.mq.TextMessageSender">
+		<property name="jmsTemplate" ref="scf:jmsTemplate" />
+	</bean>
+
+</beans>

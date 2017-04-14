@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+	<!-- 设置sql参数 如果java属性为空需要这样配置进行转换成sql的null，因为mybatis没有提供java中null类型的转换器-->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+
+	</typeAliases>
+
+	<plugins>
+		<!-- 分页拦截器 -->
+		<plugin
+			interceptor="com.scf.core.context.mybatis.interceptor.PaginationInterceptor">
+			<property name="dialect" value="mysql" />
+		</plugin>
+	</plugins>
+
+</configuration>

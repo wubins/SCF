@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SCF_Base.iml" filepath="$PROJECT_DIR$/.idea/modules/SCF_Base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-core/base-core.iml" filepath="$PROJECT_DIR$/.idea/modules/base-core/base-core.iml" group="base-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-core/base-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/base-core/base-core_main.iml" group="base-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-core/base-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/base-core/base-core_test.iml" group="base-core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-util/base-util.iml" filepath="$PROJECT_DIR$/.idea/modules/base-util/base-util.iml" group="base-util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-util/base-util_main.iml" filepath="$PROJECT_DIR$/.idea/modules/base-util/base-util_main.iml" group="base-util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-util/base-util_test.iml" filepath="$PROJECT_DIR$/.idea/modules/base-util/base-util_test.iml" group="base-util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-web/base-web.iml" filepath="$PROJECT_DIR$/.idea/modules/base-web/base-web.iml" group="base-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-web/base-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/base-web/base-web_main.iml" group="base-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-web/base-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/base-web/base-web_test.iml" group="base-web" />
+    </modules>
+  </component>
+</project>

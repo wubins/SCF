@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+每个权限只需要配置如下段即可，url表示当前请求的url，code为对于的权限code。注意，包含web.xml中配置的servletPath(/action/)
+	<permission>
+		<url>/action/system/manager/create</url>
+		<code>login</code>
+	</permission>
+
+ -->
+<permissions>
+	<permission>
+		<url>/action/system/account/disable.json</url>
+		<code>account_disable</code>
+	</permission>
+	<permission>
+		<url>/action/system/account/enable.json</url>
+		<code>account_enable</code>
+	</permission>
+</permissions>

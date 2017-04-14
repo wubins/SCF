@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 拦截器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			接口服务地址拦截器
+			<mvc:mapping path="/api/**" />
+			<bean
+				class="com.scf.web.interceptor.AuthenticationControlHandlerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+			
+	<!-- 系统间接口AOP，接口鉴权、日志记录等 -->
+	<bean id="interfaceLogAspect" class="com.scf.web.webservice.aspect.WebserviceAspect" >
+		<property name="messageSender" ref="scf:textMessageSender" />
+	</bean>
+	<aop:config>
+		<aop:aspect ref="interfaceLogAspect">
+			<aop:pointcut id="apiPointcut" expression="execution(* com..*.*Api.*(..))" />
+			<aop:around method="doAround" pointcut-ref="apiPointcut" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

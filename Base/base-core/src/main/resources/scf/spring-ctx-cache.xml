@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"  xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+     	http://www.springframework.org/schema/cache/spring-cache.xsd">
+     	
+    
+	 <!-- 加速缓存配置＝＝＝begin＝＝＝，这里我们基于memcache -->
+	 
+	 <!-- 缓存上下文，缓存加速的代码入口，支持事务特性-->
+	 <bean id="scf:cacheContext" class="com.scf.core.context.spring.cache.CacheContext"> 
+	 <!-- 缓存名称要和scf:commonCache中的缓存名称一致 -->
+	 	<property name="cacheName" value="commonCache"></property>
+	 	<property name="cacheManager"  ref="scf:cacheManager"></property>
+	 </bean>
+	 
+	<!-- spring的缓存管理器组合-->  
+	<bean id="scf:cacheManager" class="com.scf.core.context.spring.cache.manager.CompositeCachesManager"> 
+	    <property name="cacheManagers"> 
+		    <list> 
+		    		<ref bean="scf:memcachedCacheManager" />
+			</list>
+ 		</property>
+ 		<!-- 缓存加速开关 -->
+ 		 <property name="cacheEnable" value="${cache.store.enable}"/>
+  </bean>
+  
+	  <!-- spring的缓存管理器-->  
+     <bean id="scf:memcachedCacheManager" class="com.scf.core.context.spring.cache.manager.MemcachedCacheManager">
+        <property name="caches">  
+            <set>  
+               <bean class="com.scf.core.context.spring.cache.MemCache">  
+                   <property name="cache" ref="scf:commonCache"/>
+                   <property name="expire" value="86400"/>    
+                 </bean>  
+             </set>  
+         </property>  
+         <property name="transactionAware" value="true"/>
+     </bean>  
+   <!-- 缓存对象 -->
+    <bean name="scf:commonCache" class="com.scf.core.context.spring.cache.factory.MemcacheFactory">  
+        <property name="configuration">  
+            <bean class="com.google.code.ssm.providers.CacheConfiguration">  
+                <property name="consistentHashing" value="true" />  
+            </bean>  
+         </property>  
+        <property name="cacheName" value="commonCache"/>  
+	</bean>
+	
+	 <!-- 加速缓存配置＝＝＝end＝＝＝，这里我们基于memcache -->
+	
+	
+	
+	
+</beans>

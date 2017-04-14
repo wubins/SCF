@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 使用工厂创建mongo实例 -->
+	<bean id="scf:mongoClient" 
+		class="com.scf.core.context.spring.morphia.MongoFactoryBean">
+		<property name="readSecondary" value="${mongoDB.options.readSecondary}" />
+		<property name="writeConcern" value="${mongoDB.options.writeConcern}" />
+		<property name="connectionsPerHost" value="${mongoDB.options.maxWaitTime}" />
+		<property name="threadsAllowedToBlockForConnectionMultiplier"
+			value="${mongoDB.options.threadsAllowedToBlockForConnectionMultiplier}" />
+		<property name="maxWaitTime" value="${mongoDB.options.maxWaitTime}" />
+		<property name="connectTimeout" value="${mongoDB.options.connectTimeout}" />
+
+		<!-- 设定服务器列表 -->
+		<property name="serverStrings">
+			<array>
+				<value>${mongoDB.server}</value>
+			</array>
+		</property>
+
+		<!-- 设定服务器用户列表 -->
+		<!-- <property name="authStrings">
+			<array>
+				<value>${mongoDB.userName}:${mongoDB.password}:${mongoDB.authDB}</value>
+			</array>
+		</property> -->
+	</bean>
+
+	<!-- 使用工厂创建morphia实例，同时完成类映射操作 -->
+	<bean id="scf:morphia"
+		class="com.scf.core.context.spring.morphia.MorphiaFactoryBean">
+	</bean>
+
+	<!-- 使用工厂创建datastore，同时完成index和caps的确认操作 -->
+	<bean id="scf:mongodb_ds"
+		class="com.scf.core.context.spring.morphia.DatastoreFactoryBean">
+		<property name="morphia" ref="scf:morphia" />
+		<property name="mongoClient" ref="scf:mongoClient" />
+		<property name="dbName" value="${mongoDB.dbName}" />
+
+
+		<!-- 是否进行index和caps的确认操作，默认为flase -->
+		<property name="toEnsureIndexes" value="true" />
+		<property name="toEnsureCaps" value="true" />
+	</bean>
+</beans> 

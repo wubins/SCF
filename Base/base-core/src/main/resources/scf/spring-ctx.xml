@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"    
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:annotation-config />
+    
+    <!-- import annotation component -->
+     <context:component-scan base-package="com.scf" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>  
+    
+    <!-- aop bean self inject -->
+    <bean id="scf:injectAopSelfBeanProcessor" class="com.scf.core.context.spring.InjectAopSelfBeanProcessor"/>
+     
+    <!-- 配置线程池 --> 
+	<bean id ="scf:taskExecutor"  class ="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" > 
+			<!-- 线程池维护线程的最少数量 --> 
+			<property name ="corePoolSize" value ="5" />
+			<!-- 线程池维护线程所允许的空闲时间 --> 
+			<property name ="keepAliveSeconds" value ="30000" />
+			<!-- 线程池维护线程的最大数量 --> 
+			<property name ="maxPoolSize" value ="200" />
+			<!-- 线程池所使用的缓冲队列 --> 
+			<property name ="queueCapacity" value ="300" />
+	</bean> 
+	
+	
+	<!--国际化资源配置文件 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>scf/i18n/ex</value>
+				<value>project/i18n/messages</value>
+			</list>
+		</property>
+	</bean>
+    
+    <!-- context -->
+    <bean id="ctx" class="com.scf.core.context.spring.ContextAware"/>
+    
+    <!-- import files -->
+    <import resource="classpath*:scf/spring-ctx-param.xml"/>
+    <!-- imports base module files -->
+    <import resource="classpath*:scf/module/**/spring-ctx.xml"/>
+    
+    
+</beans>

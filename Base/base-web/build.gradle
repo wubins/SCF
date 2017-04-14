@@ -1,0 +1,17 @@
+
+dependencies {
+    
+    compile project(':base-util')
+    compile project(':base-core')
+    
+    
+    compile(
+        'org.springframework:spring-web:4.0.9.RELEASE',
+        'org.springframework:spring-webmvc:4.0.9.RELEASE',
+        'org.apache.poi:poi-ooxml:3.5-FINAL'
+    )
+    
+    testCompile(
+        'org.springframework:spring-test:4.0.9.RELEASE'
+    )
+}

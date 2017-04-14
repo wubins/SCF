@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SCF_Modules.iml" filepath="$PROJECT_DIR$/.idea/modules/SCF_Modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-security/module-security.iml" filepath="$PROJECT_DIR$/.idea/modules/module-security/module-security.iml" group="module-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-security/module-security_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-security/module-security_main.iml" group="module-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-security/module-security_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-security/module-security_test.iml" group="module-security" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-sms/module-sms.iml" filepath="$PROJECT_DIR$/.idea/modules/module-sms/module-sms.iml" group="module-sms" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-sms/module-sms_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-sms/module-sms_main.iml" group="module-sms" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-sms/module-sms_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-sms/module-sms_test.iml" group="module-sms" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode.iml" filepath="$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode.iml" group="module-verifycode" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode_main.iml" filepath="$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode_main.iml" group="module-verifycode" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode_test.iml" filepath="$PROJECT_DIR$/.idea/modules/module-verifycode/module-verifycode_test.iml" group="module-verifycode" />
+    </modules>
+  </component>
+</project>

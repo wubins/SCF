@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    
+    <!-- properties config -->
+    <bean id="propertyConfigurer" class="com.scf.core.context.spring.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" /> 
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:scf/jdbc_default.properties</value>
+                <value>classpath*:project/jdbc.properties</value>
+                <value>classpath*:scf/nosql_default.properties</value>
+                <value>classpath*:project/nosql.properties</value>
+                <value>classpath*:scf/ds_default.properties</value>
+                <value>classpath*:project/ds.properties</value>
+                <value>classpath*:scf/mybatis_default.properties</value>
+                <value>classpath*:project/mybatis.properties</value>
+                <value>classpath*:scf/memcache_default.properties</value>
+                <value>classpath*:project/memcache.properties</value>
+                <value>classpath*:scf/redis_default.properties</value>
+                <value>classpath*:project/redis.properties</value>
+                <value>classpath*:scf/cache_default.properties</value>
+                <value>classpath*:project/cache.properties</value>
+                <value>classpath*:scf/mq_default.properties</value>
+                <value>classpath*:project/mq.properties</value>
+                <value>classpath*:scf/module/**/config.properties</value>
+                <value>classpath*:scf/config.properties</value>
+                <value>classpath*:project/config.properties</value>
+            </list>
+        </property>
+    </bean>    
+</beans>

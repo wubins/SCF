@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"  xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+     	http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+	<!-- redis 配置  begin-->
+	<!-- redis操作类 -->
+	<bean id="scf:redisOperation" class="com.scf.core.context.spring.redis.cleint.RedisOperation">
+		<property name="enable" value="${redis.enable}" />
+		<!-- 重试超时-->
+		<property name="timeout" value="${redis.sentinel.retrytimeout}" />
+		<property name="stringRedisTemplate" ref="scf:stringRedisTemplate" />
+	</bean>
+	
+    
+    <bean id="scf:jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="usePool" value="true"/>
+        <property name="hostName" value="${redis.host}" />
+        <property name="port" value="${redis.port}" />
+        <property name="password" value="${redis.password}" />
+        <constructor-arg index="0" ref="scf:jedisPoolConfig" />
+    </bean>
+
+  	<!-- redis pool配置 -->
+	<bean id="scf:jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="maxTotal" value="${redis.pool.maxActive}" />
+		<property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+		<property name="testOnReturn" value="${redis.pool.testOnReturn}" />
+	</bean>
+    
+
+    <bean id="scf:stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="scf:jedisConnFactory" />
+    </bean>
+
+<!-- redis 配置  end-->
+	
+	
+</beans>

@@ -1,0 +1,107 @@
+//
+// This file is to be applied to every subproject.
+//
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+String mavenGroupId = 'com.scf.modules'
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+ext{
+        distVersion = System.properties['dv'] //like SNAPSHOT/RELEASE
+    softVersion = System.properties['sv'] // like 1.0
+    envVersion =  System.properties['ev'] //like dev/test/demo/line
+}
+
+
+if(!envVersion){
+    envVersion = 'dev'
+}else{
+    envVersion = envVersion.toLowerCase()
+}
+
+if(!softVersion){
+    softVersion = '1.1'
+}
+
+if(!distVersion){
+    distVersion = 'SNAPSHOT'
+}else{
+    distVersion = distVersion.toUpperCase()
+}
+
+ext.mavenVersion = softVersion + '-' + distVersion;
+
+String distLibary=distVersion.toLowerCase()+"s";
+
+println envVersion + '-' + mavenVersion
+
+repositories {
+    maven {
+            mavenLocal()
+            url 'http://121.196.233.149:8081/nexus/content/groups/public/'
+   }
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+      compile(
+        'org.springframework:spring-web:4.0.9.RELEASE'
+        //'org.apache.cxf:apache-cxf:3.0.0'
+    )
+    compile(group:'com.scf.base', name:'base-core', version:mavenVersion, changing:true)
+    compile(group:'com.scf.base', name:'base-util', version:mavenVersion, changing:true)
+    compile(group:'com.scf.base', name:'base-web', version:mavenVersion, changing:true)
+    testCompile(
+        'junit:junit:4.10',
+        'org.springframework:spring-test:4.0.9.RELEASE',
+        'mysql:mysql-connector-java:5.1.37'
+    ) 
+}
+
+String mavenArtifactId = name
+
+group = mavenGroupId
+version = mavenVersion
+
+task sourcesJar(type: Jar, dependsOn: classes, description: 'Creates a jar from the source files.') {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+
+configure(install.repositories.mavenInstaller) {
+    pom.project {
+        groupId = mavenGroupId
+        artifactId = mavenArtifactId
+        version = mavenVersion
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url:  "http://121.196.233.149:8081/nexus/content/repositories/${distLibary}/"){
+                authentication(userName: "deployment" , password: "jlycmvn123456" )
+            }
+        }
+    }
+}
+
+task createFolders(description: 'Creates the source folders if they do not exist.') doLast {
+    sourceSets*.allSource*.srcDirs*.each { File srcDir ->
+        if (!srcDir.isDirectory()) {
+            println "Creating source folder: ${srcDir}"
+            srcDir.mkdirs()
+        }
+    }
+}
+

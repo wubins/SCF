@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+   
+       <!--各项目需要配置的 权限拦截器，后期进一步封装进来 -->
+    <!--  <mvc:interceptors>
+         <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/html/login.html"/>
+            <mvc:exclude-mapping path="/errors/**"/>
+            <mvc:exclude-mapping path="/login.json"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/api/**"/>
+            <mvc:exclude-mapping path="/**/res/**"/>
+            <bean class="com.scf.module.security.interceptor.AuthorityInterceptor">
+            公用请求路径，只需要登录即可访问
+                <property name="baseUrl">
+                <list>
+                        <value>/common/goods/getServiceHtmlList</value>
+                </list>
+                </property>
+                注入数据源，可以扩展自定义的 permissionMetaProvider，默认xml
+                <property name="permissionMetaProvider" ref="scf:permissionMetaXmlProvider"></property>
+            </bean>
+     </mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- 权限提供器 -->
+	<bean  id="scf:permissionMetaXmlProvider"  class="com.scf.module.security.meta.support.PermissionMetaXmlProvider"/>
+</beans>

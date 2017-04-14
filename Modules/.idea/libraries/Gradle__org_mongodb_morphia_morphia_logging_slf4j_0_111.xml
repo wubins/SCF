@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mongodb.morphia:morphia-logging-slf4j:0.111">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb.morphia/morphia-logging-slf4j/0.111/93bf1b5bff4582b43bd678af8f27626dce89b187/morphia-logging-slf4j-0.111.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb.morphia/morphia-logging-slf4j/0.111/c750f16bf6390589d2de1fc88a4be6820fb5b699/morphia-logging-slf4j-0.111-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,14 @@
+dependencies {
+    compile(
+        'commons-beanutils:commons-beanutils:1.9.2',
+        'org.apache.httpcomponents:httpclient:4.2.5',
+        'org.springframework:spring-aop:4.0.9.RELEASE',
+        'javax.servlet:servlet-api:2.5',
+		'com.fasterxml.jackson.core:jackson-databind:2.3.3',
+		'org.apache.commons:commons-lang3:3.1',
+		'com.thoughtworks.xstream:xstream:1.4.7',
+		'com.alibaba:fastjson:1.2.7',
+		'nl.bitwalker:UserAgentUtils:1.2.4',
+		'org.apache.poi:poi:3.12'
+    )
+}

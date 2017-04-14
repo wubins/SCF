@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scf.core.context.po.User">
+	<resultMap id="UserMap" type="com.scf.core.context.po.User">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="desc" column="desc" />
+	</resultMap>
+	
+	<sql id="fileds">`id`, `username`, `password`, `desc`</sql>
+	<sql id="values">#{id}, #{username}, #{password}, #{desc}</sql>
+	
+	<insert id="add" parameterType="com.scf.core.context.po.User" useGeneratedKeys="true" keyProperty="id">
+	insert into `user`(<include refid="fileds"/>)
+	values(<include refid="values"/>)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+	delete from `user` where id = #{id}
+	</delete>
+	
+	<delete id="deleteAll">
+	delete from `user`
+	</delete>
+	
+	<update id="update" parameterType="com.scf.core.context.po.User">
+	update `user`
+	<set>
+		<if test="username != null">username=#{username},</if>
+		<if test="password != null">password=#{password},</if>
+		<if test="desc != null">desc=#{desc},</if>
+	</set>
+	where `id`=#{id}
+	</update>
+	
+	<select id="find" resultMap="UserMap">
+	select <include refid="fileds"/> from `user` where id = #{id}
+	</select>
+	
+	<select id="findAll" resultMap="UserMap">
+	select <include refid="fileds"/> from `user`
+	</select>
+</mapper>

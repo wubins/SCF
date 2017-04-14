@@ -1,0 +1,36 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+dependencies {
+    compile project(':base-util')
+    compile(
+    	'org.mongodb.morphia:morphia:0.111',
+    	'cglib:cglib:3.1',
+    	'com.thoughtworks.proxytoys:proxytoys:1.0',
+    	'org.mongodb.morphia:morphia-logging-slf4j:0.111',
+		'org.springframework.data:spring-data-redis:1.5.1.RELEASE',
+        'org.springframework:spring-context:4.0.9.RELEASE',
+		'org.springframework:spring-context-support:4.0.9.RELEASE',
+        'org.springframework:spring-orm:4.0.9.RELEASE',
+        'org.springframework:spring-jms:4.0.9.RELEASE',
+        'org.hibernate:hibernate-core:3.6.9.Final',
+		'org.quartz-scheduler:quartz:1.8.6',
+        'com.google.guava:guava:17.0',
+        'com.alibaba:druid:1.0.26',
+        'commons-pool:commons-pool:1.5.4',
+//        'commons-dbcp:commons-dbcp:1.4',
+        //'org.activiti:activiti-engine:5.16',
+        //'org.activiti:activiti-spring:5.16',
+        'org.aspectj:aspectjweaver:1.8.1',
+        'jaxen:jaxen:1.1.4',
+        'com.googlecode.xmemcached:xmemcached:2.0.0',
+		'com.google.code.simple-spring-memcached:simple-spring-memcached:3.5.0',
+		'com.google.code.simple-spring-memcached:xmemcached-provider:3.5.0',
+        'redis.clients:jedis:2.6.2',
+        'joda-time:joda-time:1.6.2',
+        'org.apache.activemq:activemq-all:5.11.1',
+        'org.mybatis:mybatis:3.1.1',
+        'org.mybatis:mybatis-spring:1.1.1'
+    )
+}
